@@ -1,7 +1,7 @@
 name: ConsoleLogger
 api: 1.6.0
 main: hoyinm\consolelogger\ConsoleLogger
-version: 1.0.1
+version: 1.0.2
 author: hoyinm
 description: Log player commands just like Bukkit Servers
 website: http://www.cybercube-hk.com

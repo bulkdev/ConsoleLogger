@@ -26,24 +26,24 @@ class ConsoleLogger extends PluginBase implements Listener{
     public function onEnable(){
 	    $this->getServer()->getPluginManager()->registerEvents($this,$this);
 		$this->getLogger()->debug("Loading resources...");
-        @mkdir($this->getDataFolder());
-        $this->configFile = new Config($this->getDataFolder()."saves.yml", Config::YAML, array()); 
-		$this->getLogger()->info("Generated saves.yml in PocketMine-MP\plugins\ConsoleLogger\saves.yml");
-		$this->getLogger()->info(" Everything loaded!");
+        $this->saveDefaultConfig();
+		$this->reloadConfig();
 		$this->getLogger()->info(TextFormat::GOLD." Plugin Enabled!");
 	}
 	public function onPlayerCommand(PlayerCommandPreprocessEvent $event){
 		$player = $event->getPlayer()->getName();
-		if(substr($message = $event->getMessage(), 0, 1) === "/"){
-			echo "<server> $player issued server command: $message";
+		if($this->getConfig()->get("LogPlayerCommands") === true){
+		    if(substr($message = $event->getMessage(), 0, 1) === "/"){
+			    echo "<server> $player issued server command: $message";
+		    }
 		}
-		$this->configFile->set($player->getName(), $event->getMessage());
-        $this->configFile->save();
 	}
 	public function onConsoleCommand(ServerCommandEvent $event){
 		$cmd = $event->getCommand();
-		if($cmd = $event->getCommand()){
-			echo "<server> CONSOLE issued server command: /$cmd \n";
+		if($this->getConfig()->get("LogConsoleCommands") === true){
+		    if($cmd = $event->getCommand()){
+			    echo "<server> CONSOLE issued server command: /$cmd \n";
+		    }
 		}
 	}
 }

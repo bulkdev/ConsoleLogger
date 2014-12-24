@@ -1,0 +1,7 @@
+#Config for ConsoleLogger
+
+# Log what command players issued
+LogPlayerCommands: true
+
+# Log what command console issued
+LogConsoleCommands: true
