@@ -32,18 +32,14 @@ class ConsoleLogger extends PluginBase implements Listener{
 	}
 	public function onPlayerCommand(PlayerCommandPreprocessEvent $event){
 		$player = $event->getPlayer()->getName();
-		if($this->getConfig()->get("LogPlayerCommands") === true){
-		    if(substr($message = $event->getMessage(), 0, 1) === "/"){
-			    echo "<server> $player issued server command: $message";
-		    }
+	        if(substr($message = $event->getMessage(), 0, 1) === "/"){
+		    echo "<server> $player issued server command: $message";
 		}
 	}
 	public function onConsoleCommand(ServerCommandEvent $event){
 		$cmd = $event->getCommand();
-		if($this->getConfig()->get("LogConsoleCommands") === true){
-		    if($cmd = $event->getCommand()){
-			    echo "<server> CONSOLE issued server command: /$cmd \n";
-		    }
+		if($cmd = $event->getCommand()){
+	                echo "<server> CONSOLE issued server command: /$cmd \n";
 		}
 	}
 }
